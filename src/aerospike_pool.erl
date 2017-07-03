@@ -321,11 +321,12 @@ pop_random(List) ->
     %% initialize RNG, if not yet
     case get(random_seed) of
         undefined ->
-            undefined = random:seed(os:timestamp());
+            TS = os:timestamp(),
+            _ = rand:seed(exsplus, TS);
         _Seed ->
             undefined
     end,
-    {List1, [Elem | List2]} = lists:split(random:uniform(length(List)) - 1, List),
+    {List1, [Elem | List2]} = lists:split(rand:uniform(length(List)) - 1, List),
     {Elem, List1 ++ List2}.
 
 %% ----------------------------------------------------------------------
