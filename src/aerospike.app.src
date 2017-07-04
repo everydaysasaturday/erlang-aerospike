@@ -8,6 +8,7 @@
   {description,  "Aerospike Client"},
   {vsn,          "{{VERSION}}"},
   {registered,   []},
+  {applications, []},
   {modules,      [aerospike,
                   aerospike_socket,
                   aerospike_pool,
