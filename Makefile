@@ -25,7 +25,7 @@ endif
 
 compile:
 	mkdir -p ebin
-	sed "s/{{VERSION}}/$(VERSION)/" src/$(APP).app.in > ebin/$(APP).app
+	sed "s/{{VERSION}}/$(VERSION)/" src/$(APP).app.src > ebin/$(APP).app
 	echo '["src/*"].' > Emakefile
 	erl -noinput -eval "up_to_date=make:all([$(COPTS)]),halt()"
 
