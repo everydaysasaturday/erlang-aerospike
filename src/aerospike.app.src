@@ -1,0 +1,16 @@
+%%% @author Petri Ruutikainen <petri.ruutikainen@outlook.com>
+%%% @since 4 July 2017
+%%% @copyright 2017, Petri Ruutikainen <petri.ruutikainen@outlook.com>
+%%% @doc New aerospike application resource file as .src
+
+{application, aerospike,
+ [
+  {description,  "Aerospike Client"},
+  {vsn,          "{{VERSION}}"},
+  {modules,      [aerospike,
+                  aerospike_socket,
+                  aerospike_pool,
+                  aerospike_encoder,
+                  aerospike_decoder
+                 ]}
+ ]}.
