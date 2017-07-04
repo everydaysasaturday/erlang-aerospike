@@ -12,5 +12,6 @@
                   aerospike_pool,
                   aerospike_encoder,
                   aerospike_decoder
-                 ]}
+                 ]},
+  {registered, []}
  ]}.
