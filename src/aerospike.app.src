@@ -7,11 +7,11 @@
  [
   {description,  "Aerospike Client"},
   {vsn,          "{{VERSION}}"},
+  {registered,   []},
   {modules,      [aerospike,
                   aerospike_socket,
                   aerospike_pool,
                   aerospike_encoder,
                   aerospike_decoder
-                 ]},
-  {registered, []}
+                 ]}
  ]}.
