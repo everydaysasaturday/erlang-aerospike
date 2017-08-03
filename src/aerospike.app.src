@@ -6,7 +6,7 @@
 {application, aerospike,
  [
   {description,  "Aerospike Client"},
-  {vsn,          "{{VERSION}}"},
+  {vsn,          "0.0.5"},
   {registered,   []},
   {applications, []},
   {modules,      [aerospike,
