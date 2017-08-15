@@ -250,6 +250,7 @@ req(Pid, Request, Timeout) ->
                   {ok, InitialState :: #state{}} |
                   {stop, Reason :: any()}.
 init({Host, Port, Options, Caller}) ->
+    process_flag(trap_exit, true),
     ?trace("init(~9999p)", [{Host, Port, Options}]),
     Reconnect = lists:member(reconnect, Options),
     SyncStart = lists:member(sync_start, Options),
