@@ -63,7 +63,7 @@
         (HostnameOrIP :: nonempty_string() | atom() | binary()) |
         inet:ip_address().
 
--type port() :: integer().
+-type port() :: non_neg_integer().
 -type options() :: [option()].
 
 -type option() ::
