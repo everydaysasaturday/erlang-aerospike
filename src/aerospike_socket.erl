@@ -63,7 +63,9 @@
         (HostnameOrIP :: nonempty_string() | atom() | binary()) |
         inet:ip_address().
 
--type socket_port() :: non_neg_integer().
+-type socket_port() :: 
+        (Port :: inet:port_number()).
+
 -type options() :: [option()].
 
 -type option() ::
@@ -73,7 +75,7 @@
         {reconnect_period, Millis :: non_neg_integer()} |
         {state_listener, pid() | (RegisteredName :: atom())}.
 
--type conf_options () :: [host(), socket_port(), options()].
+-type conf_options () :: [host() | socket_port() | options()].
 
 -type msg_options() :: [msg_option()].
 
