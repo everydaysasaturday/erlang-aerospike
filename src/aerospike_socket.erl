@@ -63,9 +63,6 @@
         (HostnameOrIP :: nonempty_string() | atom() | binary()) |
         inet:ip_address().
 
--type socket_port() :: 
-        (Port :: inet:port_number()).
-
 -type options() :: [option()].
 
 -type option() ::
@@ -75,7 +72,7 @@
         {reconnect_period, Millis :: non_neg_integer()} |
         {state_listener, pid() | (RegisteredName :: atom())}.
 
--type conf_options () :: [host() | socket_port() | options()].
+-type start_options () :: [host() | inet:port_number() | options()].
 
 -type msg_options() :: [msg_option()].
 
@@ -125,11 +122,16 @@
 %%     on connect and {aerospike_socket, ClientPID, disconnected} on
 %%     disconnection.</li>
 %% </ul>
--spec start_link(Options :: conf_options()) ->
+-spec start_link(Options :: start_options()) ->
                         {ok, Pid :: pid()} | {error, Reason :: any()}.
-start_link([Host, Port, Options]) ->
-    Caller = self(),
-    gen_server:start_link(?MODULE, _Args = {Host, Port, Options, Caller}, []).
+start_link(Opts) ->
+    Host = proplists:get_value(host, Opts),
+    Port = proplists:get_value(port, Opts),
+
+    Opts1 = proplists:delete(port, Opts),
+    Options = proplists:delete(host, Opts1),
+    start_link(Host, Port, Options).
+
 -spec start_link(Host :: host(), Port :: inet:port_number(),
                  Options :: options()) ->
                         {ok, Pid :: pid()} | {error, Reason :: any()}.
