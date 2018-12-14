@@ -1,3 +1,6 @@
+erlang-aerospike (0.5.1) unstable; ungency=low
+  * socket: fix erlang 21 erlang:get_stacktrace/0: deprecated stuff
+
 erlang-aerospike (0.5.0) unstable; urgency=low
 
   * pool: fix specs
