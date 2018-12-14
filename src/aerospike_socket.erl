@@ -9,6 +9,15 @@
 
 -behaviour(gen_server).
 
+%% erlang:get_stacktrace(): deprecated fix
+-ifdef(OTP_RELEASE). %% this implies 21 or higher
+-define(EXCEPTION(Class, Reason, Stacktrace), Class:Reason:Stacktrace).
+-define(GET_STACK(Stacktrace), Stacktrace).
+-else.
+-define(EXCEPTION(Class, Reason, _), Class:Reason).
+-define(GET_STACK(_), erlang:get_stacktrace()).
+-endif.
+
 %% API exports
 -export(
    [start_link/1,
@@ -394,12 +403,12 @@ handle_call(?REQ(Request, Timeout), _From, State) ->
             ok = reconnect(self()),
             {reply, {error, Reason}, disconnect(State)}
     catch
-        ExcType:ExcReason ->
-            FinalReason =
+        ?EXCEPTION(Class, Reason, Stacktrace) ->
+            FinalReason = 
                 {crashed,
-                 [{type, ExcType},
-                  {reason, ExcReason},
-                  {stacktrace, erlang:get_stacktrace()},
+                 [{type, Class},
+                  {reason, Reason},
+                  {stacktrace, ?GET_STACK(Stacktrace)},
                   {request, Request}]},
             ok = reconnect(self()),
             {reply, {error, FinalReason}, disconnect(State)}
